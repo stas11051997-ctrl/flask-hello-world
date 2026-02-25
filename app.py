@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-BOT_TOKEN = os.environ.get("BOT_TOKEN")
+BOT_TOKEN = os.environ.get("BOT_8235347609:AAHwXbcewdwsfgZ9Gs8D6jR02fopsmtvfJU")
 CHAT_ID = os.environ.get("CHAT_ID")
 
 @app.route("/")
@@ -26,7 +26,7 @@ SubID: {subid}
 """
 
     requests.get(
-        f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
+        f"https://api.telegram.org/bot{BOT_8235347609:AAHwXbcewdwsfgZ9Gs8D6jR02fopsmtvfJU}/sendMessage",
         params={"chat_id": CHAT_ID, "text": text}
     )
 
