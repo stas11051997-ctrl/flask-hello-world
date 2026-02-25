@@ -1,6 +1,33 @@
-from flask import Flask
+from flask import Flask, request
+import requests
+import os
+
 app = Flask(__name__)
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
+CHAT_ID = os.environ.get("CHAT_ID")
+
+@app.route("/")
+def home():
+    return "Postback bot is running"
+
+@app.route("/postback")
+def postback():
+    payout = request.args.get("payout", "0")
+    status = request.args.get("status", "unknown")
+    subid = request.args.get("subid", "no_subid")
+
+    text = f"""
+🔥 Нова конверсія!
+
+Status: {status}
+Payout: {payout}$
+SubID: {subid}
+"""
+
+    requests.get(
+        f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
+        params={"chat_id": CHAT_ID, "text": text}
+    )
+
+    return "OK"
